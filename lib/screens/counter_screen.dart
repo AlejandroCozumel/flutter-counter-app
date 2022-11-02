@@ -20,6 +20,11 @@ class _CounterScreenState extends State<CounterScreen> {
     setState(() {});
   }
 
+  void reset() {
+    counter = 0;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     const fontSize30 = TextStyle(fontSize: 30);
@@ -42,6 +47,7 @@ class _CounterScreenState extends State<CounterScreen> {
       floatingActionButton: CustomFloatingActions(
         increaseFunction: increase,
         decreaseFunction: decrease,
+        resetFunction: reset,
       ),
     );
   }
@@ -50,11 +56,13 @@ class _CounterScreenState extends State<CounterScreen> {
 class CustomFloatingActions extends StatelessWidget {
   final Function increaseFunction;
   final Function decreaseFunction;
+  final Function resetFunction;
 
   const CustomFloatingActions({
     Key? key,
     required this.increaseFunction,
     required this.decreaseFunction,
+    required this.resetFunction,
   }) : super(key: key);
 
   @override
@@ -68,7 +76,7 @@ class CustomFloatingActions extends StatelessWidget {
         ),
         FloatingActionButton(
           child: const Icon(Icons.restore),
-          onPressed: () => decreaseFunction(),
+          onPressed: () => resetFunction(),
         ),
         FloatingActionButton(
           child: const Icon(Icons.exposure_minus_1_outlined),
